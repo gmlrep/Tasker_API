@@ -5,3 +5,4 @@ __pycache__/
 /.venv/
 /postgres
 /app/db/database.db
+/app/logs/

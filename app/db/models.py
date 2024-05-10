@@ -1,15 +1,10 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, conint, EmailStr, constr
-from sqlalchemy import Integer, String, BigInteger, ForeignKey, func, Column, JSON
-from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
+from sqlalchemy import BigInteger, ForeignKey, func, JSON
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.schemas.user import UserRole
-
-
-class Base(DeclarativeBase):
-    pass
+from app.db.database import Base
 
 
 class User(Base):
@@ -35,3 +30,5 @@ class Tasks(Base):
     user_id: Mapped[str] = mapped_column(ForeignKey('user.user_id'), nullable=False)
 
     user: Mapped['User'] = relationship(back_populates='tasks')
+
+

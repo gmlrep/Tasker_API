@@ -35,5 +35,13 @@ class SToken(BaseModel):
     token_type: str = 'bearer'
 
 
-class SIsOk(BaseModel):
-    ok: bool
+class STokenResponse(BaseModel):
+    status: str = 'success'
+    data: SToken | None = None
+    details: str | None = None
+
+
+class SOkResponse(BaseModel):
+    status: str = 'success'
+    data: dict = {'ok': True}
+    details: str | None = None

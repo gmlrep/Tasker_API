@@ -8,7 +8,8 @@ from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 
 from app.core.config import settings
-from app.db.database import ClientDB
+# from app.core.exception_handlers import CustomException
+from app.db.CRUD import BaseCRUD
 from app.schemas.user import SUserSignUp, SUserAdd, SUserInfo
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
@@ -98,7 +99,7 @@ async def get_hashed_psw(param: SUserSignUp, current_ip: str = None) -> SUserAdd
 
 
 async def authenticate_user(username: str, password: str) -> SUserInfo | bool:
-    user = await ClientDB.get_user(username)
+    user = await BaseCRUD.get_user(username)
     if not user:
         raise HTTPException(
             status_code=401,
